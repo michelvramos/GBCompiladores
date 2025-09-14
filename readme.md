@@ -137,11 +137,15 @@ java -cp "lib/jflex-full-1.9.1.jar;bin" src.MainLexAnalyzer src/source.code
 
 ## 🧾 Entregáveis (lembrete)
 
-* **PPT**: tokens/regex → decisões → trechos de código → estados → resultados → dificuldades.
-* **Vídeo (2–5 min)**: execução + narrativa curta do processo.
-* **Código-fonte completo**: inclua `grammar.flex` e **comando** pra gerar o `Lexer`.
-* **Arquivos de teste**: `tests/`.
-* **Relatório**: tabela de cadeias (Etapa 1), prints das saídas, **diferença entre `if` como keyword vs identificador**, comentários sobre modularização/estados.
+* PPT da apresentação com explicações, trechos de código e resultados.
+* Vídeo explicativo (2–5 minutos) mostrando o programa rodando e narrando o processo.
+* Código-fonte completo na linguagem escolhida.
+* Arquivos de entrada de teste.
+* Relatório simples com:
+* Tabela de cadeias (Etapa 1).
+* Prints das saídas dos testes.
+* Diferença entre reconhecer if como palavra-chave ou identificador.
+* Comentários sobre modularização e estados.
 
 ---
 

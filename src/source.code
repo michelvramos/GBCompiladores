@@ -10,6 +10,7 @@ void Main()
     int array_size = 3;
     int arr[3] = {1,2,3};
     float z = 0;
+    int ifThisWasAKeywordForReal = 10;
     
     bool greather = a > b;
 
@@ -35,8 +36,9 @@ void Main()
 
     while(a < 10)
     {
-        printf("%d", a);
+        printf("%d", a, ifThisWasAKeywordForReal);
         a++;
+        ifThisWasAKeywordForReal--;
     }
 
 }
