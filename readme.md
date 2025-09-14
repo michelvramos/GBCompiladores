@@ -1,6 +1,7 @@
-Aqui vai um **README.md** bem bagual — é só copiar, colar no arquivo `README.md` na raiz do projeto e subir. Boa soneca depois 😴
+# Como usar
 
----
+Windows: Baixar o projeto e executar run.bat
+Linux: TODO
 
 # Analisador Léxico (JFlex + Java)
 
