@@ -6,19 +6,24 @@ package src;
 %{ 
   private void imprimir(String descricao, String lexema) {
     System.out.println(lexema + " - " + descricao);
-  }
+  }  
 %}
 
 // Configurações da classe gerada
 %class Lexer       // Nome da classe Java gerada
 %type Object                   // Tipo de retorno do método yylex()
+%unicode
+%line
+%column
 
 // Definição de padrões reutilizáveis
 BRANCO  = [ \t\r\n]+
+COMENT_LINHA = "//".*
+COMENT_BLOCO = "/*" ([^*] | ("*" [^/]))* "*/"
 ID = [_a-zA-Z][_a-zA-Z0-9]*
 DIGITO = [0-9]
-NUMERO = [+-]?{DIGITO}+
-DECIMAL = {NUMERO}"."{DIGITO}+
+NUMERO = {DIGITO}+
+DECIMAL = {DIGITO}+"."{DIGITO}+
 STRING = "\"".+"\""
 P_VARARG = "..."
 OP_LOGICO     = "&&" | "||"
@@ -88,6 +93,10 @@ TERMINADOR = ";"
 {OP_SUB} { imprimir("Operador subtração", yytext()); }
 {OP_DIV} { imprimir("Operador divisão", yytext()); }
 {P_VARARG} { imprimir("Parâmetro argumento variável", yytext()); }
+{COMENT_LINHA} { imprimir("Comentário linha", yytext()); }
+{COMENT_BLOCO} { imprimir("Comentário bloco", yytext()); }
 
 // Regra de erro para caracteres não reconhecidos
-. { throw new RuntimeException("Caractere inválido " + yytext()); }
+. { throw new RuntimeException(
+      "Caractere inválido '" + yytext() + "' em " + (yyline+1) + ":" + (yycolumn+1)
+    ); }
