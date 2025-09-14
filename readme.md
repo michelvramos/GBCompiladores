@@ -1,0 +1,181 @@
+Aqui vai um **README.md** bem bagual — é só copiar, colar no arquivo `README.md` na raiz do projeto e subir. Boa soneca depois 😴
+
+---
+
+# Analisador Léxico (JFlex + Java)
+
+Trabalho de Compiladores — **gera um lexer com JFlex** e roda em cima de um código-fonte de exemplo.
+
+> **Stack**: JDK 21, JFlex, linha de comando no Windows (PowerShell/CMD).
+> **Estado atual**: projeto já compilando e rodando via `run.bat`.
+
+---
+
+## 📦 Estrutura
+
+```
+Trabalho GB/
+├─ lib/
+│  └─ jflex-full-1.9.1.jar
+├─ src/
+│  ├─ grammar.flex          # especificação do lexer (fonte de verdade)
+│  ├─ Lexer.java            # gerado pelo JFlex (pode ser regenerado)
+│  ├─ Main.java             # OU MainLexAnalyzer.java (classe principal)
+│  └─ source.code           # exemplo de entrada
+├─ bin/                     # .class gerados (limpo no build)
+├─ run.bat                  # compila e executa
+├─ .gitignore
+└─ README.md
+```
+
+> Se sua classe principal for `MainLexAnalyzer`, adapte os comandos abaixo para `src.MainLexAnalyzer`.
+> Caso seja `Main`, use `src.Main`.
+
+---
+
+## ⚙️ Pré-requisitos
+
+* **JDK 21+** instalado (`java -version`, `javac -version` devem funcionar).
+* **JFlex jar** em `lib/jflex-full-1.9.1.jar` (já está versionado aqui).
+* Terminal **PowerShell** ou **CMD** no Windows.
+
+---
+
+## 🚀 TL;DR (comandos rápidos)
+
+Gerar lexer → compilar → executar:
+
+```powershell
+# 1) Gerar o Lexer a partir do grammar.flex (sem criar backups ~)
+java -cp "lib/jflex-full-1.9.1.jar" jflex.Main --nobak src/grammar.flex
+
+# 2) Compilar (gera .class em bin/)
+javac -d bin -cp "lib/jflex-full-1.9.1.jar;." src/*.java
+
+# 3) Executar (ajuste a classe principal se for MainLexAnalyzer)
+java -cp "lib/jflex-full-1.9.1.jar;bin" src.Main src/source.code
+```
+
+Ou simplesmente:
+
+```powershell
+.\run.bat
+```
+
+> O `run.bat` já faz **limpeza do `bin/`**, compila e executa. Se quiser que ele rode um arquivo específico, edite a última linha do `.bat`.
+
+---
+
+## 🧩 Como funciona
+
+1. **Você edita** as regras em `src/grammar.flex` (tokens, regex, mensagens).
+2. **Gera** o código do lexer com JFlex → sai `src/Lexer.java`.
+3. **Compila** com `javac` → sai tudo em `bin/`.
+4. **Executa** a classe principal (`src.Main` ou `src.MainLexAnalyzer`) informando **o arquivo de entrada** a ser analisado (ex.: `src/source.code`).
+5. O programa imprime **tokens** (e **erros léxicos** quando houver), com linha/coluna/lexema conforme você implementou.
+
+---
+
+## 📜 Exemplos de uso
+
+### Gerar o lexer (sem backup `~`)
+
+```powershell
+java -cp "lib/jflex-full-1.9.1.jar" jflex.Main --nobak src/grammar.flex
+```
+
+### Compilar tudo
+
+```powershell
+javac -d bin -cp "lib/jflex-full-1.9.1.jar;." src/*.java
+```
+
+### Executar (classe principal `Main`)
+
+```powershell
+java -cp "lib/jflex-full-1.9.1.jar;bin" src.Main src/source.code
+```
+
+### Executar (classe principal `MainLexAnalyzer`)
+
+```powershell
+java -cp "lib/jflex-full-1.9.1.jar;bin" src.MainLexAnalyzer src/source.code
+```
+
+> **Dica**: se não passar arquivo, você pode redirecionar do `stdin`:
+>
+> ```powershell
+> type src\source.code | java -cp "lib/jflex-full-1.9.1.jar;bin" src.Main
+> ```
+
+---
+
+## 🧪 Testes
+
+Crie seus arquivos de teste (ex.: `tests/ok_minimos.code`, `tests/erros.code`) e rode apontando para eles:
+
+```powershell
+java -cp "lib/jflex-full-1.9.1.jar;bin" src.Main tests/ok_minimos.code
+```
+
+**Cobertura mínima que eu uso pra conferir:**
+
+* Identificadores, inteiros/decimais, strings (com escape, não-fechadas)
+* Operadores: aritméticos, relacionais, igualdade, lógicos
+* Delimitadores: `() { } [] , ;`
+* Comentários: linha e bloco (incluindo bloco não-fechado)
+* Espaços/tabs/CRLF e múltiplas linhas
+* Palavras-chave vs identificadores parecidos
+
+---
+
+## 🧹 Limpeza / geração de novo
+
+* O `run.bat` **recria** a pasta `bin/` a cada compilação.
+* O JFlex, sem `--nobak`, cria backups `Lexer.java~`. Pra evitar:
+
+  ```powershell
+  jflex.Main --nobak ...
+  ```
+* Se aparecer aviso de **LF → CRLF** no Git, normal no Windows. Quer padronizar? Use `.gitattributes`:
+
+  ```
+  * text=auto
+  *.bat text eol=crlf
+  *.ps1 text eol=crlf
+  *.java text eol=lf
+  *.flex text eol=lf
+  ```
+
+---
+
+## 🧠 Notas baguais (pitadas práticas)
+
+* Em **classe de caractere** `[ ... ]` **não** use `|`. Ex.:
+  `ID = [_a-zA-Z][_a-zA-Z0-9]*` ✅
+  `ID = [_|a-z|A-Z][a-z|A-Z|0-9|_]*` ❌
+* Operadores com **2 chars** primeiro, pra não “comer” `<` antes de `<=`.
+  Ex.: `("<=" | ">=" | "==" | "!=" | "<" | ">")`
+* `.` casa **qualquer** caractere. Pra ponto literal, use `\.` ou `"."`.
+* Estados ajudam (ex.: `%state STRING`) se quiser tratar string/escape com carinho.
+* Se usar `%cup`, o `yylex()` retorna `Symbol`; sem `%cup`, retorna o que você definiu nas ações.
+
+---
+
+## 🧾 Entregáveis (lembrete)
+
+* **PPT**: tokens/regex → decisões → trechos de código → estados → resultados → dificuldades.
+* **Vídeo (2–5 min)**: execução + narrativa curta do processo.
+* **Código-fonte completo**: inclua `grammar.flex` e **comando** pra gerar o `Lexer`.
+* **Arquivos de teste**: `tests/`.
+* **Relatório**: tabela de cadeias (Etapa 1), prints das saídas, **diferença entre `if` como keyword vs identificador**, comentários sobre modularização/estados.
+
+---
+
+## 📄 Licença
+
+Livre pra uso acadêmico. Se for usar fora, manda um mate e tá tudo certo. ☕️🧉
+
+---
+
+**Contato**: abra uma issue no repositório se der ruim, ou mande um “bah, deu certo!” 😄
