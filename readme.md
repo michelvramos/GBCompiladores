@@ -1,7 +1,10 @@
 # Como usar
 
 ### Windows
-Baixar o projeto, abra o terminal e execute `run.bat`.
+1. Baixar o projeto.
+1. Abra o terminal.
+1. Navegue até a pasta do projeto.
+1. Execute `run.bat`.
 
 ### Linux
 TODO
