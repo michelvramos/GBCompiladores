@@ -142,10 +142,10 @@ java -cp "lib/jflex-full-1.9.1.jar;bin" src.MainLexAnalyzer src/source.code
 * Código-fonte completo na linguagem escolhida.
 * Arquivos de entrada de teste.
 * Relatório simples com:
-* Tabela de cadeias (Etapa 1).
-* Prints das saídas dos testes.
-* Diferença entre reconhecer if como palavra-chave ou identificador.
-* Comentários sobre modularização e estados.
+  * Tabela de cadeias (Etapa 1).
+  * Prints das saídas dos testes.
+  * Diferença entre reconhecer if como palavra-chave ou identificador.
+  * Comentários sobre modularização e estados.
 
 ---
 
