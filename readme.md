@@ -28,9 +28,6 @@ Trabalho GB/
 └─ README.md
 ```
 
-> Se sua classe principal for `MainLexAnalyzer`, adapte os comandos abaixo para `src.MainLexAnalyzer`.
-> Caso seja `Main`, use `src.Main`.
-
 ---
 
 ## ⚙️ Pré-requisitos
