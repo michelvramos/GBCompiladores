@@ -1,14 +1,17 @@
 # Como usar
 
-Windows: Baixar o projeto e executar run.bat
-Linux: TODO
+### Windows
+Baixar o projeto, abra o terminal e execute `run.bat`.
+
+### Linux
+TODO
 
 # Analisador Léxico (JFlex + Java)
 
 Trabalho de Compiladores — **gera um lexer com JFlex** e roda em cima de um código-fonte de exemplo.
 
-> **Stack**: JDK 21, JFlex, linha de comando no Windows (PowerShell/CMD).
-> **Estado atual**: projeto já compilando e rodando via `run.bat`.
+> **Stack**: JDK 21, JFlex, linha de comando no Windows (PowerShell/CMD).  
+> **Estado atual**: projeto já compilando e rodando via `run.bat`.  
 
 ---
 
@@ -21,7 +24,7 @@ Trabalho GB/
 ├─ src/
 │  ├─ grammar.flex          # especificação do lexer (fonte de verdade)
 │  ├─ Lexer.java            # gerado pelo JFlex (pode ser regenerado)
-│  ├─ Main.java             # OU MainLexAnalyzer.java (classe principal)
+│  ├─ Main.java             # classe principal
 │  └─ source.code           # exemplo de entrada
 ├─ bin/                     # .class gerados (limpo no build)
 ├─ run.bat                  # compila e executa
@@ -41,6 +44,13 @@ Trabalho GB/
 
 ## 🚀 TL;DR (comandos rápidos)
 
+Simplesmente:
+
+```powershell
+.\run.bat
+```
+ou 
+
 Gerar lexer → compilar → executar:
 
 ```powershell
@@ -52,12 +62,6 @@ javac -d bin -cp "lib/jflex-full-1.9.1.jar;." src/*.java
 
 # 3) Executar (ajuste a classe principal se for MainLexAnalyzer)
 java -cp "lib/jflex-full-1.9.1.jar;bin" src.Main src/source.code
-```
-
-Ou simplesmente:
-
-```powershell
-.\run.bat
 ```
 
 > O `run.bat` já faz **limpeza do `bin/`**, compila e executa. Se quiser que ele rode um arquivo específico, edite a última linha do `.bat`.
@@ -108,25 +112,6 @@ java -cp "lib/jflex-full-1.9.1.jar;bin" src.MainLexAnalyzer src/source.code
 
 ---
 
-## 🧪 Testes
-
-Crie seus arquivos de teste (ex.: `tests/ok_minimos.code`, `tests/erros.code`) e rode apontando para eles:
-
-```powershell
-java -cp "lib/jflex-full-1.9.1.jar;bin" src.Main tests/ok_minimos.code
-```
-
-**Cobertura mínima que eu uso pra conferir:**
-
-* Identificadores, inteiros/decimais, strings (com escape, não-fechadas)
-* Operadores: aritméticos, relacionais, igualdade, lógicos
-* Delimitadores: `() { } [] , ;`
-* Comentários: linha e bloco (incluindo bloco não-fechado)
-* Espaços/tabs/CRLF e múltiplas linhas
-* Palavras-chave vs identificadores parecidos
-
----
-
 ## 🧹 Limpeza / geração de novo
 
 * O `run.bat` **recria** a pasta `bin/` a cada compilação.
@@ -147,19 +132,6 @@ java -cp "lib/jflex-full-1.9.1.jar;bin" src.Main tests/ok_minimos.code
 
 ---
 
-## 🧠 Notas baguais (pitadas práticas)
-
-* Em **classe de caractere** `[ ... ]` **não** use `|`. Ex.:
-  `ID = [_a-zA-Z][_a-zA-Z0-9]*` ✅
-  `ID = [_|a-z|A-Z][a-z|A-Z|0-9|_]*` ❌
-* Operadores com **2 chars** primeiro, pra não “comer” `<` antes de `<=`.
-  Ex.: `("<=" | ">=" | "==" | "!=" | "<" | ">")`
-* `.` casa **qualquer** caractere. Pra ponto literal, use `\.` ou `"."`.
-* Estados ajudam (ex.: `%state STRING`) se quiser tratar string/escape com carinho.
-* Se usar `%cup`, o `yylex()` retorna `Symbol`; sem `%cup`, retorna o que você definiu nas ações.
-
----
-
 ## 🧾 Entregáveis (lembrete)
 
 * **PPT**: tokens/regex → decisões → trechos de código → estados → resultados → dificuldades.
@@ -172,8 +144,4 @@ java -cp "lib/jflex-full-1.9.1.jar;bin" src.Main tests/ok_minimos.code
 
 ## 📄 Licença
 
-Livre pra uso acadêmico. Se for usar fora, manda um mate e tá tudo certo. ☕️🧉
-
----
-
-**Contato**: abra uma issue no repositório se der ruim, ou mande um “bah, deu certo!” 😄
+Livre pra uso acadêmico.
