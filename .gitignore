@@ -1,0 +1,29 @@
+# Saídas de build
+/bin/
+/src/bin/
+/out/
+/build/
+/target/
+
+# Bytecode
+*.class
+
+# Backups do JFlex e editores
+*~
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# IDEs
+/.idea/
+/*.iml
+# Mantenha a pasta do VS Code (útil pro formatter)
+/.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+!.vscode/launch.json
+
+# Dependências: opte por versionar o JFlex jar para o trabalho
+# Se NÃO quiser versionar jars, descomente:
+# /lib/
