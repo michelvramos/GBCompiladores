@@ -12,17 +12,20 @@ import java.nio.charset.StandardCharsets;
  *      - Executa Main.class
  */
 
-public class Main {
-    public static void main(String[] args) throws Exception {
-
+public class Main 
+{
+    public static void main(String[] args) throws Exception 
+    {
         Reader srcInput = new InputStreamReader(new FileInputStream("src/source.code"), StandardCharsets.UTF_8);
         Lexer lexer = new Lexer(srcInput); 
 
-        try {
+        try 
+        {
             lexer.yylex();
-        } catch (Exception ex) {
+        } 
+        catch (Exception ex) 
+        {
             System.out.println("Exception: " + ex.getMessage());
         }
-
     }
 }
