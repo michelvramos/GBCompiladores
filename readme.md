@@ -18,7 +18,7 @@ Trabalho de Compiladores — **gera um lexer com JFlex** e roda em cima de um c�
 
 ---
 
-## 📦 Estrutura
+## Estrutura
 
 ```
 Trabalho GB/
@@ -37,7 +37,7 @@ Trabalho GB/
 
 ---
 
-## ⚙️ Pré-requisitos
+## Pré-requisitos
 
 * **JDK 21+** instalado (`java -version`, `javac -version` devem funcionar).
 * **JFlex jar** em `lib/jflex-full-1.9.1.jar` (já está versionado aqui).
@@ -45,7 +45,7 @@ Trabalho GB/
 
 ---
 
-## 🚀 TL;DR (comandos rápidos)
+## TL;DR (comandos rápidos)
 
 Simplesmente:
 
@@ -71,7 +71,7 @@ java -cp "lib/jflex-full-1.9.1.jar;bin" src.Main src/source.code
 
 ---
 
-## 🧩 Como funciona
+## Como funciona
 
 1. **Você edita** as regras em `src/grammar.flex` (tokens, regex, mensagens).
 2. **Gera** o código do lexer com JFlex → sai `src/Lexer.java`.
@@ -81,7 +81,7 @@ java -cp "lib/jflex-full-1.9.1.jar;bin" src.Main src/source.code
 
 ---
 
-## 📜 Exemplos de uso
+## Exemplos de uso
 
 ### Gerar o lexer (sem backup `~`)
 
@@ -115,7 +115,7 @@ java -cp "lib/jflex-full-1.9.1.jar;bin" src.MainLexAnalyzer src/source.code
 
 ---
 
-## 🧹 Limpeza / geração de novo
+## Limpeza / geração de novo
 
 * O `run.bat` **recria** a pasta `bin/` a cada compilação.
 * O JFlex, sem `--nobak`, cria backups `Lexer.java~`. Pra evitar:
@@ -135,7 +135,7 @@ java -cp "lib/jflex-full-1.9.1.jar;bin" src.MainLexAnalyzer src/source.code
 
 ---
 
-## 🧾 Entregáveis (lembrete)
+## Entregáveis (lembrete)
 
 * PPT da apresentação com explicações, trechos de código e resultados.
 * Vídeo explicativo (2–5 minutos) mostrando o programa rodando e narrando o processo.
@@ -149,6 +149,6 @@ java -cp "lib/jflex-full-1.9.1.jar;bin" src.MainLexAnalyzer src/source.code
 
 ---
 
-## 📄 Licença
+## Licença
 
 Livre pra uso acadêmico.
