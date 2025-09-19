@@ -1,6 +1,6 @@
 # Saídas de build
-/bin/
-/src/bin/
+#/bin/
+#/src/bin/
 /out/
 /build/
 /target/
