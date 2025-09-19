@@ -5,7 +5,8 @@ package src;
 // Seção 2: Código Java adicional e configurações
 %{ 
   private void imprimir(String descricao, String lexema) {
-    System.out.println(lexema + " - " + descricao);
+    
+    System.out.println(String.format("%-30s",lexema) + "\t"+ yyline + "\t" + yycolumn + "\t" + descricao);
   }  
 %}
 

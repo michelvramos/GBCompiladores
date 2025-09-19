@@ -382,7 +382,8 @@ class Lexer {
 
   /* user code: */
   private void imprimir(String descricao, String lexema) {
-    System.out.println(lexema + " - " + descricao);
+    
+    System.out.println(String.format("%-30s",lexema) + "\t"+ yyline + "\t" + yycolumn + "\t" + descricao);
   }  
 
 

@@ -1,5 +1,5 @@
 
-//apenas para o linter não chiar
+//comentário simples
 void printf(const char*, ...);
 
 /* Este é o método main */

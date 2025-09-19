@@ -19,6 +19,10 @@ public class Main
         Reader srcInput = new InputStreamReader(new FileInputStream("src/source.code"), StandardCharsets.UTF_8);
         Lexer lexer = new Lexer(srcInput); 
 
+        System.out.println("--------------------------------------------------------------------------------------");
+        System.out.println(String.format("%-30s","Token") + "\tLinha\tColuna\tDescrição");
+        System.out.println("--------------------------------------------------------------------------------------");
+
         try 
         {
             lexer.yylex();
