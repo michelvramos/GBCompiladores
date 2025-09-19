@@ -29,6 +29,7 @@ P_VARARG = "..."
 OP_LOGICO     = "&&" | "||"
 OP_IGUALDADE  = "==" | "!="
 OP_RELACIONAL = "<=" | ">=" | "<" | ">"
+OP_LAMBDA = "=>"
 OP_INC = "++"
 OP_DEC = "--"
 OP_AST = "*"
@@ -68,6 +69,7 @@ TERMINADOR = ";"
 "false"         { imprimir("Palavra reservada false", yytext()); }
 "true"          { imprimir("Palavra reservada true", yytext()); }
 "const"         { imprimir("Palavra reservada const", yytext()); }
+"return"         { imprimir("Palavra reservada return", yytext()); }
 {BRANCO}        {  }
 {ID}            { imprimir("Identificador", yytext()); }
 {NUMERO}        { imprimir("Número inteiro", yytext()); }
@@ -95,6 +97,7 @@ TERMINADOR = ";"
 {P_VARARG}      { imprimir("Parâmetro argumento variável", yytext()); }
 {COMENT_LINHA}  { imprimir("Comentário linha", yytext()); }
 {COMENT_BLOCO}  { imprimir("Comentário bloco", yytext()); }
+{OP_LAMBDA}     { imprimir("Operador Lambda", yytext()); }
 
 // Regra de erro para caracteres não reconhecidos
 . { throw new RuntimeException(

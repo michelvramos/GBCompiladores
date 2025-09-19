@@ -43,4 +43,9 @@ void Main()
         ifThisWasAKeywordForReal--;
     }
 
+    Callback myCallback = (a,b)=>
+    {
+        return a+ b;
+    };
+
 }
