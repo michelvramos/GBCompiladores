@@ -4,10 +4,11 @@ package src;
 %%
 // Seção 2: Código Java adicional e configurações
 %{ 
-  private void imprimir(String descricao, String lexema) {
-    
-    System.out.println(String.format("%-30s",lexema) + "\t"+ yyline + "\t" + yycolumn + "\t" + descricao);
-  }  
+  private void imprimir(String descricao, String lexema) 
+  {
+    System.out.println(String.format("%30s\t%-30s\t%d\t%d", descricao, lexema, yyline, yycolumn));
+  }
+ 
 %}
 
 // Configurações da classe gerada
@@ -90,7 +91,7 @@ OP_LOGICO_BIT = [\^&|]
 {COL_ESQ}       { imprimir("Abre colchetes", yytext()); }
 {COL_DIR}       { imprimir("Fecha colchetes", yytext()); }
 {OP_NEG}        { imprimir("Operador negação", yytext()); }
-{TERMINADOR}    { imprimir("Terminador de instrução/declaração", yytext()); }
+{TERMINADOR}    { imprimir("Fim de instrução/declaração", yytext()); }
 {OP_LOGICO}     { imprimir("Operador lógico", yytext()); }
 {OP_IGUALDADE}  { imprimir("Operador de igualdade", yytext()); }
 {OP_DESIGUALDADE} { imprimir("Operador de desigualdade", yytext()); }

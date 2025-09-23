@@ -20,7 +20,7 @@ public class Main
         Lexer lexer = new Lexer(srcInput); 
 
         System.out.println("--------------------------------------------------------------------------------------");
-        System.out.println(String.format("%-30s","Token") + "\tLinha\tColuna\tDescrição");
+        System.out.println(String.format("%30s\t%-30s\t%s\t%s","Descrição","Token","Linha","Coluna"));
         System.out.println("--------------------------------------------------------------------------------------");
 
         try 

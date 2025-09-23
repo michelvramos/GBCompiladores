@@ -388,10 +388,11 @@ class Lexer {
   private boolean zzEOFDone;
 
   /* user code: */
-  private void imprimir(String descricao, String lexema) {
-    
-    System.out.println(String.format("%-30s",lexema) + "\t"+ yyline + "\t" + yycolumn + "\t" + descricao);
-  }  
+  private void imprimir(String descricao, String lexema) 
+  {
+    System.out.println(String.format("%30s\t%-30s\t%d\t%d", descricao, lexema, yyline, yycolumn));
+  }
+ 
 
 
   /**
@@ -873,7 +874,7 @@ class Lexer {
           // fall through
           case 68: break;
           case 14:
-            { imprimir("Terminador de instrução/declaração", yytext());
+            { imprimir("Fim de instrução/declaração", yytext());
             }
           // fall through
           case 69: break;
