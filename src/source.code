@@ -68,8 +68,7 @@ void Main()
             myCallback();
             printf("a {b} [c] %s, ok?");
         } while(true);
-     }   
-    
+     }       
 
      switch(a)
      {
