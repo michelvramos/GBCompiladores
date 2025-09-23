@@ -1,3 +1,4 @@
+CLS
 @echo off
 
 REM Verificando Java

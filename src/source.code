@@ -13,6 +13,7 @@ void Main()
     int arr[3] = {1,2,3};
     float z = 0;
     int ifThisWasAKeywordForReal = 10;
+    string description = "Trabalho nota 10!!!";
     
     bool greather = a > b;
 
@@ -47,5 +48,49 @@ void Main()
     {
         return a+ b;
     };
+
+    double dx = 10.0;
+    char c = 'a';
+    const int k = 1;
+    bool aBoolValue = true;
+    bool aBoolValueNegated = !aBoolValue;
+
+    /* 
+    bloco de comentário 
+    multi-linha
+    com três linhas 
+    */
+
+    if (a <= b && a != 0 || !aBoolValueNegated) 
+    {       
+        do 
+        {
+            myCallback();
+            printf("a {b} [c] %s, ok?");
+        } while(true);
+     }   
+    
+
+     switch(a)
+     {
+        case 1:
+        break;
+        default:
+     }
+
+     int flag = 1;
+     flag =  flag << 3;
+
+     if(flag == (1 << 3))
+     {
+        printf("Isso está correto?");
+     }
+
+     if(((flag >> 3) == 1) ^ 1)
+     {
+        printf("Isso ainda está correto?");
+     }
+
+     printf(description);
 
 }

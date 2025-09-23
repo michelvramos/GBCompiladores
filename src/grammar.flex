@@ -26,9 +26,12 @@ DIGITO = [0-9]
 NUMERO = {DIGITO}+
 DECIMAL = {DIGITO}+"."{DIGITO}+
 STRING = "\"".+"\""
+CHAR = '[a-zA-Z0-9]'
 P_VARARG = "..."
+OP_BIT_SHIFT = "<<"|">>"
 OP_LOGICO     = "&&" | "||"
-OP_IGUALDADE  = "==" | "!="
+OP_IGUALDADE  = "=="
+OP_DESIGUALDADE = "!="
 OP_RELACIONAL = "<=" | ">=" | "<" | ">"
 OP_LAMBDA = "=>"
 OP_INC = "++"
@@ -47,11 +50,13 @@ ATTR    = "="
 OP_NEG = "!"
 SEP_PARAM = ","
 TERMINADOR = ";"
+DPONTOS = ":"
+OP_LOGICO_BIT = [\^&|]
+
 
 %%
 // Seção 3: Regras de reconhecimento de tokens
 "if"            { imprimir("Palavra reservada if", yytext()); }
-"then"          { imprimir("Palavra reservada then", yytext()); }
 "else"          { imprimir("Palavra reservada else", yytext()); }
 "for"           { imprimir("Palavra reservada for", yytext()); }
 "do"            { imprimir("Palavra reservada do", yytext()); }
@@ -65,12 +70,13 @@ TERMINADOR = ";"
 "float"         { imprimir("Palavra reservada float", yytext()); }
 "double"        { imprimir("Palavra reservada double", yytext()); }
 "char"          { imprimir("Palavra reservada char", yytext()); }
+"string"        { imprimir("Palavra reservada string", yytext()); }
 "void"          { imprimir("Palavra reservada void", yytext()); }
 "bool"          { imprimir("Palavra reservada bool", yytext()); }
 "false"         { imprimir("Palavra reservada false", yytext()); }
 "true"          { imprimir("Palavra reservada true", yytext()); }
 "const"         { imprimir("Palavra reservada const", yytext()); }
-"return"         { imprimir("Palavra reservada return", yytext()); }
+"return"        { imprimir("Palavra reservada return", yytext()); }
 {BRANCO}        {  }
 {ID}            { imprimir("Identificador", yytext()); }
 {NUMERO}        { imprimir("Número inteiro", yytext()); }
@@ -84,23 +90,31 @@ TERMINADOR = ";"
 {COL_ESQ}       { imprimir("Abre colchetes", yytext()); }
 {COL_DIR}       { imprimir("Fecha colchetes", yytext()); }
 {OP_NEG}        { imprimir("Operador negação", yytext()); }
-{TERMINADOR}    { imprimir("Terminador de intrução/declaração", yytext()); }
+{TERMINADOR}    { imprimir("Terminador de instrução/declaração", yytext()); }
 {OP_LOGICO}     { imprimir("Operador lógico", yytext()); }
-{OP_IGUALDADE}  { imprimir("Operador de igualdade/inequalidade", yytext()); }
+{OP_IGUALDADE}  { imprimir("Operador de igualdade", yytext()); }
+{OP_DESIGUALDADE} { imprimir("Operador de desigualdade", yytext()); }
 {OP_RELACIONAL} { imprimir("Operador relacional", yytext()); }
-{SEP_PARAM}     { imprimir("Separador de parametro", yytext()); }
+{SEP_PARAM}     { imprimir("Separador de parâmetro", yytext()); }
 {OP_INC}        { imprimir("Operador incremento", yytext()); }
 {OP_DEC}        { imprimir("Operador decremento", yytext()); }
 {OP_AST}        { imprimir("Operador asterisco", yytext()); }
-{OP_SOM}        { imprimir("Operador SOMA", yytext()); }
+{OP_SOM}        { imprimir("Operador soma", yytext()); }
 {OP_SUB}        { imprimir("Operador subtração", yytext()); }
 {OP_DIV}        { imprimir("Operador divisão", yytext()); }
 {P_VARARG}      { imprimir("Parâmetro argumento variável", yytext()); }
 {COMENT_LINHA}  { imprimir("Comentário linha", yytext()); }
 {COMENT_BLOCO}  { imprimir("Comentário bloco", yytext()); }
 {OP_LAMBDA}     { imprimir("Operador Lambda", yytext()); }
+{DPONTOS}       { imprimir("Operador pontos", yytext()); }
+{CHAR}          { imprimir("Caracter literal", yytext()); }
+{OP_BIT_SHIFT}  {imprimir("Operador bit shift", yytext());}
+{OP_LOGICO_BIT} {imprimir("Operador lógico bit a bit", yytext());}
 
 // Regra de erro para caracteres não reconhecidos
-. { throw new RuntimeException(
-      "Caractere inválido '" + yytext() + "' em " + (yyline+1) + ":" + (yycolumn+1)
-    ); }
+. { 
+    throw new RuntimeException
+    (
+      "Caractere inválido '" + yytext() + "' na linha " + (yyline+1) + " coluna " + (yycolumn+1)
+    ); 
+  }
