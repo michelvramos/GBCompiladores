@@ -9,7 +9,7 @@ javac -version
 REM Limpar pasta bin
 echo Limpando pasta bin...
 del /s /q "bin\*.class" 2>nul
-del /s /q "src\bin\*.class" 2>nul
+del /s /q "bin\src*.class" 2>nul
 
 
 REM Compilar a gramática
