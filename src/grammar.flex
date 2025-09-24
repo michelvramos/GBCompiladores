@@ -1,8 +1,8 @@
-// Seção 1: Declarações de pacote e imports
+// Declarações de pacote e imports
 package src;
 
 %%
-// Seção 2: Código Java adicional e configurações
+// Código Java adicional e configurações
 %{ 
   private void imprimir(String descricao, String lexema) 
   {
